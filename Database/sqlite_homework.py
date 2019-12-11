@@ -46,3 +46,9 @@ print(c1)
 print(c2)
 print(f'Firstname: {c1.first_name}, Lastname: {c1.last_name}')
 print(f'Firstname: {c2.first_name}, Lastname: {c2.last_name}')
+
+
+session.add(c1)
+session.add(c2)
+print(f'{c1.id}, {c2.id}')
+

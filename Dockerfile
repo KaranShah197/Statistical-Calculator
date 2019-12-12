@@ -6,4 +6,5 @@ RUN pip install -r ./requirements.txt
 WORKDIR /web
 ENTRYPOINT ["python"]
 WORKDIR /web
+
 CMD ["/web/Database/sqlite_homework.py"]

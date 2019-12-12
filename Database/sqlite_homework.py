@@ -297,3 +297,15 @@ session.query(
     func.count("*").label('town_count'),
     Customer.town
 ).group_by(Customer.town).having(func.count("*") > 2).all()
+
+
+#duplicate check
+from sqlalchemy import distinct
+
+session.query(Customer.town).filter(Customer.id  < 10).all()
+session.query(Customer.town).filter(Customer.id  < 10).distinct().all()
+
+session.query(
+    func.count(distinct(Customer.town)),
+    func.count(Customer.town)
+).all()

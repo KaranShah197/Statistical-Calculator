@@ -225,3 +225,7 @@ session.query(Customer).filter(and_(
         Customer.town == 'Peterbrugh',
         )
 )).all()
+
+
+session.query(Order).filter(Order.date_shipped == None).all()
+session.query(Order).filter(Order.date_shipped != None).all()

@@ -190,3 +190,7 @@ session.query(Order).count()  # get the total number of records in the orders ta
 session.query(Customer).first()
 session.query(Item).first()
 session.query(Order).first()
+
+session.query(Customer).get(1)
+session.query(Item).get(1)
+session.query(Order).get(100)

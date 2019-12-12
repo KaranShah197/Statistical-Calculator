@@ -196,3 +196,5 @@ session.query(Item).get(1)
 session.query(Order).get(100)
 
 session.query(Customer).filter(Customer.first_name == 'John').all()
+
+print(session.query(Customer).filter(Customer.first_name == 'John'))

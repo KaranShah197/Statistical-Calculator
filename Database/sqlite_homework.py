@@ -172,3 +172,11 @@ print('-------')
 
 for ol in c1.orders[1].order_lines:
     print(f'{ol.id}, {ol.item}, {ol.quantity}')
+
+#Quering functions
+session.query(Customer).all()
+print(session.query(Customer))
+q = session.query(Customer)
+
+for c in q:
+    print(c.id, c.first_name)

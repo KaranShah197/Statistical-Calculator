@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 
+from sqlalchemy import text
 # 1. Created engine for sqlite
 engine = create_engine('sqlite:////web/Sqlite-Data/example.db')
 Session = sessionmaker(bind=engine)
@@ -351,3 +352,8 @@ session.query(Item).filter(
     Item.name.ilike("W%")
 ).delete(synchronize_session='fetch')
 session.commit()
+
+#Raw Queries
+session.query(Customer).filter(text("first_name = 'John'")).all()
+session.query(Customer).filter(text("town like 'Nor%'")).all()
+session.query(Customer).filter(text("town like 'Nor%'")).order_by(text("first_name, id desc")).all()

@@ -272,3 +272,14 @@ session.query(
     Order.id == 1,
 ).all()
 
+#Outer Join
+session.query(
+    Customer.first_name,
+    Order.id,
+).outerjoin(Order).all()
+
+session.query(
+    Customer.first_name,
+    Order.id,
+).outerjoin(Order, full=True).all()
+

@@ -164,3 +164,11 @@ session.commit()
 print(f'{c1.orders}')
 print(f'{o1.customer}')
 print(f'{c1.orders[0].order_lines}, {c1.orders[1].order_lines}')
+
+for ol in c1.orders[0].order_lines:
+    print(f'{ol.id}, {ol.item}, {ol.quantity}')
+
+print('-------')
+
+for ol in c1.orders[1].order_lines:
+    print(f'{ol.id}, {ol.item}, {ol.quantity}')

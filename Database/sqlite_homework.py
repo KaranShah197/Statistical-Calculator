@@ -283,3 +283,11 @@ session.query(
     Order.id,
 ).outerjoin(Order, full=True).all()
 
+#group by
+from sqlalchemy import func
+
+session.query(func.count(Customer.id)).join(Order).filter(
+    Customer.first_name == 'John',
+    Customer.last_name == 'Green',
+).group_by(Customer.id).scalar()
+

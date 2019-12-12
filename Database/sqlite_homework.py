@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Numeric
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Numeric, or_, and_, not_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
@@ -201,4 +201,27 @@ print(session.query(Customer).filter(Customer.first_name == 'John'))
 session.query(Customer).filter(Customer.id <= 5, Customer.town == "Norfolk").all()
 print(session.query(Customer).filter(Customer.id <= 5, Customer.town.like("Nor%")))
 
+# find all customers who either live in Peterbrugh or Norfolk
 
+session.query(Customer).filter(or_(
+    Customer.town == 'Peterbrugh',
+    Customer.town == 'Norfolk'
+)).all()
+
+
+# find all customers whose first name is John and live in Norfolk
+
+session.query(Customer).filter(and_(
+    Customer.first_name == 'John',
+    Customer.town == 'Norfolk'
+)).all()
+
+
+# find all johns who don't live in Peterbrugh
+
+session.query(Customer).filter(and_(
+    Customer.first_name == 'John',
+    not_(
+        Customer.town == 'Peterbrugh',
+        )
+)).all()

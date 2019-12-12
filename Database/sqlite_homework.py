@@ -42,9 +42,6 @@ class Order(Base):
     date_placed = Column(DateTime(), default=datetime.now, nullable=False)
     date_shipped = Column(DateTime())
 
-Base.metadata.create_all(engine)
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
 
 class OrderLine(Base):
     __tablename__ = 'order_lines'
@@ -54,6 +51,10 @@ class OrderLine(Base):
     quantity = Column(Integer())
     order = relationship("Order", backref='order_lines')
     item = relationship("Item")
+
+Base.metadata.create_all(engine)
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
 
 c1 = Customer(first_name = 'Toby',
               last_name = 'Miller',
@@ -147,4 +148,15 @@ line_item3 = OrderLine(order = o2, item = i2, quantity =  4)
 session.add_all([o1, o2])
 
 session.new
+session.commit()
+
+o3 = Order(customer = c1)
+orderline1 = OrderLine(item = i1, quantity = 5)
+orderline2 = OrderLine(item = i2, quantity = 10)
+
+o3.order_lines.append(orderline1)
+o3.order_lines.append(orderline2)
+
+session.add_all([o3])
+
 session.commit()

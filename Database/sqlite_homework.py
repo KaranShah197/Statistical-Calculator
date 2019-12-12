@@ -327,3 +327,16 @@ s1.union(s2).all()
 
 #union all
 s1.union_all(s2).all()
+
+#updating the data
+i = session.query(Item).get(8)
+i.selling_price = 25.91
+session.add(i)
+session.commit()
+
+# update quantity of all quantity of items to 60 whose name starts with 'W'
+
+session.query(Item).filter(
+    Item.name.ilike("W%")
+).update({"quantity": 60}, synchronize_session='fetch')
+session.commit()
